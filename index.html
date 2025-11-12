@@ -75,29 +75,34 @@
   </head>
   <body class="bg-slate-50">
     <!-- Header -->
-<header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md shadow-sm">
-  <div class="container mx-auto flex justify-between items-center py-4 px-6">
+<header class="bg-gradient-to-r from-keywest-blue to-keywest-coral shadow-lg sticky top-0 z-50">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center text-white">
     <div class="flex items-center">
-      <img src="images/palm-icon.svg" alt="Palm" class="w-8 h-8 mr-2 text-keywest-coral" />
-      <h1 class="text-2xl md:text-3xl font-bold playfair-display text-keywest-darkblue">Southernmost Aesthetics</h1>
+      <span class="text-3xl mr-2">🌴</span>
+      <h1 class="text-2xl md:text-3xl font-bold playfair-display">Southernmost Aesthetics</h1>
     </div>
     <nav class="hidden md:flex gap-6">
-      <a href="#carousel" class="text-keywest-darkblue hover:text-keywest-coral transition">Home</a>
-      <a href="#products" class="text-keywest-darkblue hover:text-keywest-coral transition">Shop</a>
-      <a href="#about" class="text-keywest-darkblue hover:text-keywest-coral transition">About</a>
-      <a href="#contact" class="bg-keywest-coral text-white py-2 px-5 rounded-lg shadow-md hover:bg-red-600 transition">Contact</a>
+      <a href="#carousel" class="hover:text-yellow-200 transition">Home</a>
+      <a href="#products" class="hover:text-yellow-200 transition">Shop</a>
+      <a href="#about" class="hover:text-yellow-200 transition">About</a>
+      <a
+        href="#contact"
+        class="bg-white text-keywest-coral font-semibold py-2 px-5 rounded-lg hover:bg-yellow-50 transition"
+        >Contact</a
+      >
     </nav>
-    <button class="md:hidden text-keywest-darkblue focus:outline-none" id="menuBtn">
+    <button class="md:hidden text-white focus:outline-none" id="menuBtn">
       <span class="material-icons text-3xl">menu</span>
     </button>
   </div>
-  <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md flex flex-col space-y-2 p-4">
-    <a href="#carousel" class="text-keywest-darkblue">Home</a>
-    <a href="#products" class="text-keywest-darkblue">Shop</a>
-    <a href="#about" class="text-keywest-darkblue">About</a>
-    <a href="#contact" class="text-keywest-coral font-semibold">Contact</a>
+  <div id="mobileMenu" class="hidden md:hidden bg-gradient-to-r from-keywest-blue to-keywest-coral flex flex-col space-y-2 p-4 text-white">
+    <a href="#carousel">Home</a>
+    <a href="#products">Shop</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="font-semibold text-yellow-200">Contact</a>
   </div>
 </header>
+
 
 
     <!-- Carousel -->
@@ -356,3 +361,4 @@
     </script>
   </body>
 </html>
+
