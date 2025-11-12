@@ -9,19 +9,12 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <style>
       body {
         font-family: "Poppins", sans-serif;
       }
       .playfair-display {
         font-family: "Playfair Display", serif;
-      }
-      .carousel-item {
-        display: none;
-      }
-      .carousel-item.active {
-        display: block;
       }
       .bg-keywest-blue {
         background-color: #00a0ad;
@@ -32,9 +25,6 @@
       .text-keywest-darkblue {
         color: #003366;
       }
-      .border-keywest-sand {
-        border-color: #f0e68c;
-      }
       .stripe-buy-button {
         background-color: #00a0ad;
         color: #fff;
@@ -43,31 +33,50 @@
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        display: inline-block;
+        text-align: center;
       }
       .stripe-buy-button:hover {
         background-color: #007a84;
         transform: scale(1.05);
       }
-      @media (max-width: 640px) {
-        h1 {
-          font-size: 1.75rem;
-        }
-        .carousel-item h2 {
-          font-size: 1.75rem;
-        }
+      .tab-active {
+        background-color: #00a0ad;
+        color: white;
+      }
+      .tab-inactive {
+        background-color: #e0f7fa;
+        color: #003366;
+      }
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .modal.active {
+        visibility: visible;
+        opacity: 1;
       }
     </style>
   </head>
   <body class="bg-slate-50">
     <!-- Header -->
-    <header class="bg-sky-100 shadow-md sticky top-0 z-50">
-      <div class="container mx-auto px-6 py-4 flex justify-between items-center flex-wrap gap-2">
+    <header class="bg-gradient-to-r from-sky-100 to-sky-200 shadow-md sticky top-0 z-50">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center flex-wrap gap-3">
         <div class="flex items-center">
-          <span class="material-icons text-keywest-coral text-3xl mr-2">beach_access</span>
-          <h1 class="text-3xl font-bold text-keywest-darkblue playfair-display">Southernmost Aesthetics</h1>
+          <span class="text-keywest-coral text-3xl mr-2">🌴</span>
+          <h1
+            class="text-3xl font-bold text-keywest-darkblue playfair-display hover:scale-105 transition-transform duration-300"
+          >
+            Southernmost Aesthetics
+          </h1>
         </div>
         <nav class="flex gap-3">
           <a
@@ -76,7 +85,7 @@
             >Products</a
           >
           <a
-            class="bg-keywest-coral hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition transform hover:scale-105"
+            class="bg-keywest-coral text-white font-semibold py-2 px-6 rounded-lg shadow-md transition transform hover:scale-105"
             href="#contact"
             >Contact</a
           >
@@ -85,361 +94,180 @@
     </header>
 
     <main class="container mx-auto px-6 py-12">
-      <!-- Carousel -->
-      <section class="mb-16 rounded-lg shadow-xl overflow-hidden border-4 border-keywest-sand" id="carousel">
-        <div class="relative h-[60vh] md:h-[75vh]">
-          <div class="carousel-item active w-full h-full">
-            <img
-              alt="Beautifully crafted seashell necklace"
-              class="w-full h-full object-cover"
-              src="images/sm-f-1.jpg"
-            />
-            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-              <h2 class="text-4xl md:text-5xl text-white font-bold playfair-display text-center px-4">
-                Home Decor From The Shore
-              </h2>
-            </div>
-          </div>
-          <div class="carousel-item w-full h-full">
-            <img
-              alt="Handmade soaps with ocean scents"
-              class="w-full h-full object-cover"
-              src="images/Screenshot%202025-06-24%20074527.png"
-            />
-            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-              <h2 class="text-4xl md:text-5xl text-white font-bold playfair-display text-center px-4">
-                A Gift For Everyone
-              </h2>
-            </div>
-          </div>
-          <div class="carousel-item w-full h-full">
-            <img
-              alt="Key West inspired decor"
-              class="w-full h-full object-cover"
-              src="images/Screenshot%202025-06-24%20074506.png"
-            />
-            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-              <h2 class="text-4xl md:text-5xl text-white font-bold playfair-display text-center px-4">
-                Discover Unique Treasures
-              </h2>
-            </div>
-          </div>
-
-          <!-- Carousel Buttons -->
-          <button
-            class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 text-keywest-darkblue p-3 rounded-full shadow-lg"
-            id="prevBtn"
-          >
-            <span class="material-icons">arrow_back_ios</span>
-          </button>
-          <button
-            class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 text-keywest-darkblue p-3 rounded-full shadow-lg"
-            id="nextBtn"
-          >
-            <span class="material-icons">arrow_forward_ios</span>
-          </button>
-          <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2" id="indicators"></div>
-        </div>
+      <!-- Hero -->
+      <section class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl text-keywest-darkblue playfair-display mb-4">Handcrafted Coastal Beauty</h2>
+        <p class="text-slate-600 text-lg max-w-2xl mx-auto">
+          Jewelry and home décor inspired by the breezy charm and colors of Key West.
+        </p>
       </section>
 
-      <!-- Products -->
-      <section class="mb-16" id="products">
+      <!-- Product Tabs -->
+      <section id="products">
         <div class="bg-sky-50 p-8 md:p-12 rounded-xl shadow-xl border border-sky-200">
-          <h2
-            class="text-3xl md:text-4xl font-bold text-keywest-darkblue playfair-display mb-10 text-center"
-          >
-            Our Featured Products
+          <h2 class="text-3xl md:text-4xl font-bold text-keywest-darkblue playfair-display mb-10 text-center">
+            Our Products
           </h2>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Product 1 -->
-            <div
-              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 group"
-            >
-              <img
-                alt="Conch Shell Earrings"
-                class="w-full h-64 object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwWJkR0uG-W_10kM_Hq5j9E1Q0pBwO8kYx5l9I1iZf2fX_l_m-Y2e8nN9c0vS_C8a8rY6oWlP0bF3_P3jB-c_X_i_A2mRzY5mU5_tT_p_Y0nJ6_V1uX7_E1eG_jY6nZ9qX"
-              />
-              <div class="p-6 flex flex-col justify-between h-full">
-                <div>
-                  <h3 class="text-xl font-semibold text-keywest-darkblue playfair-display mb-2">
-                    Conch Shell Earrings
-                  </h3>
-                  <p class="text-slate-600 text-sm mb-3">
-                    Handcrafted sterling silver earrings featuring delicate conch shell charms.
-                  </p>
-                </div>
-                <div class="flex justify-between items-center mt-auto">
-                  <p class="text-2xl font-bold text-keywest-coral">$45.00</p>
-                  <a href="https://buy.stripe.com/28E14f30S4eygwD5EC2sM00" class="stripe-buy-button">Buy Now</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Product 2 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition">
-              <img
-                alt="Key Lime Candle"
-                class="w-full h-64 object-cover"
-                src="https://images.unsplash.com/photo-1605976309763-3cae86e09700?auto=format&fit=crop&w=800&q=80"
-              />
-              <div class="p-6 flex flex-col justify-between h-full">
-                <div>
-                  <h3 class="text-xl font-semibold text-keywest-darkblue playfair-display mb-2">
-                    Key Lime Breeze Candle
-                  </h3>
-                  <p class="text-slate-600 text-sm mb-3">
-                    Soy wax candle with a refreshing Key West scent and reusable glass jar.
-                  </p>
-                </div>
-                <div class="flex justify-between items-center mt-auto">
-                  <p class="text-2xl font-bold text-keywest-coral">$28.00</p>
-                  <a href="https://buy.stripe.com/28E14f30S4eygwD5EC2sM00" class="stripe-buy-button">Buy Now</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition">
-              <img
-                alt="Driftwood Frame"
-                class="w-full h-64 object-cover"
-                src="https://images.unsplash.com/photo-1603190287605-e179d53d3496?auto=format&fit=crop&w=800&q=80"
-              />
-              <div class="p-6 flex flex-col justify-between h-full">
-                <div>
-                  <h3 class="text-xl font-semibold text-keywest-darkblue playfair-display mb-2">
-                    Coastal Driftwood Frame
-                  </h3>
-                  <p class="text-slate-600 text-sm mb-3">
-                    Rustic picture frame made from reclaimed Key West driftwood.
-                  </p>
-                </div>
-                <div class="flex justify-between items-center mt-auto">
-                  <p class="text-2xl font-bold text-keywest-coral">$38.00</p>
-                  <a href="https://buy.stripe.com/28E14f30S4eygwD5EC2sM00" class="stripe-buy-button">Buy Now</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition">
-              <img
-                alt="Seaglass Wind Chime"
-                class="w-full h-64 object-cover"
-                src="https://images.unsplash.com/photo-1598387993441-82de3b66f584?auto=format&fit=crop&w=800&q=80"
-              />
-              <div class="p-6 flex flex-col justify-between h-full">
-                <div>
-                  <h3 class="text-xl font-semibold text-keywest-darkblue playfair-display mb-2">
-                    Ocean Whisper Wind Chime
-                  </h3>
-                  <p class="text-slate-600 text-sm mb-3">
-                    Handmade wind chime with colorful Key West seaglass pieces.
-                  </p>
-                </div>
-                <div class="flex justify-between items-center mt-auto">
-                  <p class="text-2xl font-bold text-keywest-coral">$42.00</p>
-                  <a href="https://buy.stripe.com/28E14f30S4eygwD5EC2sM00" class="stripe-buy-button">Buy Now</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Product 5 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition">
-              <img
-                alt="Sunset Art Print"
-                class="w-full h-64 object-cover"
-                src="https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80"
-              />
-              <div class="p-6 flex flex-col justify-between h-full">
-                <div>
-                  <h3 class="text-xl font-semibold text-keywest-darkblue playfair-display mb-2">
-                    Mallory Square Sunset Print
-                  </h3>
-                  <p class="text-slate-600 text-sm mb-3">
-                    Vibrant art print capturing the iconic Key West sunset celebration.
-                  </p>
-                </div>
-                <div class="flex justify-between items-center mt-auto">
-                  <p class="text-2xl font-bold text-keywest-coral">$55.00</p>
-                  <a href="https://buy.stripe.com/28E14f30S4eygwD5EC2sM00" class="stripe-buy-button">Buy Now</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Product 6 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition">
-              <img
-                alt="Tropical Scarf"
-                class="w-full h-64 object-cover"
-                src="https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=800&q=80"
-              />
-              <div class="p-6 flex flex-col justify-between h-full">
-                <div>
-                  <h3 class="text-xl font-semibold text-keywest-darkblue playfair-display mb-2">
-                    Tropical Paradise Scarf
-                  </h3>
-                  <p class="text-slate-600 text-sm mb-3">
-                    Lightweight scarf with vibrant Key West floral patterns.
-                  </p>
-                </div>
-                <div class="flex justify-between items-center mt-auto">
-                  <p class="text-2xl font-bold text-keywest-coral">$32.00</p>
-                  <a href="https://buy.stripe.com/28E14f30S4eygwD5EC2sM00" class="stripe-buy-button">Buy Now</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- About -->
-      <section class="mb-16" id="about">
-        <div
-          class="bg-white p-8 md:p-12 rounded-xl shadow-xl border border-slate-200 flex flex-col md:flex-row items-center gap-8"
-        >
-          <div class="md:w-1/2">
-            <h2 class="text-3xl md:text-4xl font-bold text-keywest-darkblue playfair-display mb-6">
-              About Southernmost Aesthetics
-            </h2>
-            <p class="text-slate-700 text-lg leading-relaxed mb-4">
-              What began as a seaside love affair with handmade jewelry has drifted into custom home décor—where coastal
-              charm meets everyday magic.
-            </p>
-            <p class="text-slate-700 text-lg leading-relaxed mb-4">
-              Inspired by the vibrant colors and laid-back charm of Key West, Southernmost Aesthetics brings you a
-              curated collection of handcrafted goods and unique finds.
-            </p>
-          </div>
-          <div class="md:w-1/2 flex justify-center">
-            <img
-              alt="Southernmost Point buoy"
-              class="rounded-lg shadow-md max-w-sm w-full"
-              src="images/Southernmost_Point_Whitehead_Street_77b26da739.jpg"
-            />
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section class="bg-white p-8 md:p-12 rounded-xl shadow-xl border border-slate-200" id="contact">
-        <h2
-          class="text-3xl md:text-4xl font-bold text-keywest-darkblue playfair-display mb-8 text-center"
-        >
-          Get In Touch
-        </h2>
-        <form class="max-w-xl mx-auto space-y-6">
-          <div>
-            <label class="block text-slate-700 font-medium mb-2" for="name">Full Name</label>
-            <input
-              class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-keywest-coral focus:border-keywest-coral outline-none transition duration-200"
-              id="name"
-              name="name"
-              placeholder="Your Name"
-              type="text"
-            />
-          </div>
-          <div>
-            <label class="block text-slate-700 font-medium mb-2" for="email">Email Address</label>
-            <input
-              class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-keywest-coral focus:border-keywest-coral outline-none transition duration-200"
-              id="email"
-              name="email"
-              placeholder="you@example.com"
-              type="email"
-            />
-          </div>
-          <div>
-            <label class="block text-slate-700 font-medium mb-2" for="message">Message</label>
-            <textarea
-              class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-keywest-coral focus:border-keywest-coral outline-none transition duration-200"
-              id="message"
-              name="message"
-              placeholder="Your message..."
-              rows="5"
-            ></textarea>
-          </div>
-          <div class="text-center">
-            <button
-              class="bg-keywest-blue hover:bg-cyan-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition transform hover:scale-105"
-              type="submit"
-            >
-              Send Message
+          <!-- Tabs -->
+          <div class="flex justify-center mb-8 gap-4">
+            <button id="tabJewelry" class="tab-active py-2 px-6 rounded-lg font-semibold shadow-md transition">
+              Jewelry
+            </button>
+            <button id="tabFurniture" class="tab-inactive py-2 px-6 rounded-lg font-semibold shadow-md transition">
+              Furniture
             </button>
           </div>
-        </form>
+
+          <!-- Jewelry Grid -->
+          <div id="jewelryTab" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer product-card"
+              data-title="Conch Shell Earrings"
+              data-desc="Handcrafted sterling silver earrings featuring delicate conch shell charms."
+              data-price="$45.00"
+              data-img="https://images.unsplash.com/photo-1579033461380-adb47c3eb938?auto=format&fit=crop&w=800&q=80"
+              data-link="https://buy.stripe.com/28E14f30S4eygwD5EC2sM00"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1579033461380-adb47c3eb938?auto=format&fit=crop&w=800&q=80"
+                class="w-full h-64 object-cover"
+                alt="Conch Shell Earrings"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-keywest-darkblue playfair-display mb-2">Conch Shell Earrings</h3>
+                <p class="text-slate-600 text-sm">Handcrafted sterling silver earrings featuring delicate conch shells.</p>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition cursor-pointer product-card"
+              data-title="Key Lime Breeze Necklace"
+              data-desc="Delicate handmade necklace featuring lime green sea glass and sterling silver."
+              data-price="$38.00"
+              data-img="https://images.unsplash.com/photo-1589906695777-9b5b8d86038a?auto=format&fit=crop&w=800&q=80"
+              data-link="https://buy.stripe.com/28E14f30S4eygwD5EC2sM00"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1589906695777-9b5b8d86038a?auto=format&fit=crop&w=800&q=80"
+                class="w-full h-64 object-cover"
+                alt="Key Lime Necklace"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-keywest-darkblue playfair-display mb-2">Key Lime Breeze Necklace</h3>
+                <p class="text-slate-600 text-sm">Delicate handmade necklace featuring lime green sea glass.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Furniture Grid -->
+          <div id="furnitureTab" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              class="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition cursor-pointer product-card"
+              data-title="Driftwood Coffee Table"
+              data-desc="Rustic reclaimed driftwood table sealed with clear resin finish."
+              data-price="$260.00"
+              data-img="https://images.unsplash.com/photo-1603190287605-e179d53d3496?auto=format&fit=crop&w=800&q=80"
+              data-link="https://buy.stripe.com/28E14f30S4eygwD5EC2sM00"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1603190287605-e179d53d3496?auto=format&fit=crop&w=800&q=80"
+                class="w-full h-64 object-cover"
+                alt="Driftwood Coffee Table"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-keywest-darkblue playfair-display mb-2">Driftwood Coffee Table</h3>
+                <p class="text-slate-600 text-sm">Rustic reclaimed driftwood table sealed with clear resin finish.</p>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition cursor-pointer product-card"
+              data-title="Refinished Console Table"
+              data-desc="Coastal-inspired console table refinished in seafoam and whitewash."
+              data-price="$180.00"
+              data-img="https://images.unsplash.com/photo-1627497913770-8f55644ff49a?auto=format&fit=crop&w=800&q=80"
+              data-link="https://buy.stripe.com/28E14f30S4eygwD5EC2sM00"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1627497913770-8f55644ff49a?auto=format&fit=crop&w=800&q=80"
+                class="w-full h-64 object-cover"
+                alt="Console Table"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-keywest-darkblue playfair-display mb-2">Refinished Console Table</h3>
+                <p class="text-slate-600 text-sm">Coastal-inspired console table refinished in seafoam and whitewash.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-keywest-blue text-sky-100 py-8 text-center">
-      <div class="container mx-auto px-6">
-        <p>© 2025 Southernmost Aesthetics. All Rights Reserved.</p>
-        <p class="text-sm mt-3">Inspired by the beauty of the Florida Keys.</p>
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+      <div class="bg-white rounded-lg max-w-md w-full mx-4 p-6 relative">
+        <button id="closeModal" class="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+        <img id="modalImage" src="" alt="" class="rounded-lg mb-4 w-full h-64 object-cover" />
+        <h3 id="modalTitle" class="text-2xl font-bold text-keywest-darkblue playfair-display mb-2"></h3>
+        <p id="modalDesc" class="text-slate-600 mb-4"></p>
+        <p id="modalPrice" class="text-2xl font-bold text-keywest-coral mb-4"></p>
+        <a id="modalLink" href="#" class="stripe-buy-button w-full block text-center">Buy Now</a>
       </div>
+    </div>
+
+    <footer class="bg-keywest-blue text-sky-100 py-8 text-center mt-16">
+      <p>© 2025 Southernmost Aesthetics. All Rights Reserved.</p>
+      <p class="text-sm mt-3">Inspired by the beauty of the Florida Keys.</p>
     </footer>
 
     <script>
-      const carouselItems = document.querySelectorAll(".carousel-item");
-      const prevBtn = document.getElementById("prevBtn");
-      const nextBtn = document.getElementById("nextBtn");
-      const indicatorsContainer = document.getElementById("indicators");
-      let currentIndex = 0;
-      let intervalId;
+      // Tabs
+      const tabJewelry = document.getElementById("tabJewelry");
+      const tabFurniture = document.getElementById("tabFurniture");
+      const jewelryTab = document.getElementById("jewelryTab");
+      const furnitureTab = document.getElementById("furnitureTab");
 
-      function updateCarousel() {
-        carouselItems.forEach((item, i) => item.classList.toggle("active", i === currentIndex));
-        updateIndicators();
-      }
-      function updateIndicators() {
-        indicatorsContainer.querySelectorAll("button").forEach((btn, i) => {
-          btn.classList.toggle("bg-keywest-coral", i === currentIndex);
-          btn.classList.toggle("bg-white", i !== currentIndex);
+      tabJewelry.addEventListener("click", () => {
+        tabJewelry.classList.add("tab-active");
+        tabFurniture.classList.remove("tab-active");
+        tabFurniture.classList.add("tab-inactive");
+        jewelryTab.classList.remove("hidden");
+        furnitureTab.classList.add("hidden");
+      });
+
+      tabFurniture.addEventListener("click", () => {
+        tabFurniture.classList.add("tab-active");
+        tabJewelry.classList.remove("tab-active");
+        tabJewelry.classList.add("tab-inactive");
+        furnitureTab.classList.remove("hidden");
+        jewelryTab.classList.add("hidden");
+      });
+
+      // Product Modal
+      const modal = document.getElementById("productModal");
+      const modalImg = document.getElementById("modalImage");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalDesc = document.getElementById("modalDesc");
+      const modalPrice = document.getElementById("modalPrice");
+      const modalLink = document.getElementById("modalLink");
+      const closeModal = document.getElementById("closeModal");
+
+      document.querySelectorAll(".product-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          modalImg.src = card.dataset.img;
+          modalTitle.textContent = card.dataset.title;
+          modalDesc.textContent = card.dataset.desc;
+          modalPrice.textContent = card.dataset.price;
+          modalLink.href = card.dataset.link;
+          modal.classList.add("active");
         });
-      }
-      function createIndicators() {
-        carouselItems.forEach((_, i) => {
-          const btn = document.createElement("button");
-          btn.classList.add("w-3", "h-3", "rounded-full", "transition", "duration-300", "bg-white", "bg-opacity-50");
-          if (i === 0) btn.classList.replace("bg-white", "bg-keywest-coral");
-          btn.addEventListener("click", () => {
-            currentIndex = i;
-            updateCarousel();
-            resetInterval();
-          });
-          indicatorsContainer.appendChild(btn);
-        });
-      }
-      function showNext() {
-        currentIndex = (currentIndex + 1) % carouselItems.length;
-        updateCarousel();
-      }
-      function showPrev() {
-        currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-        updateCarousel();
-      }
-      function startInterval() {
-        intervalId = setInterval(showNext, 5000);
-      }
-      function resetInterval() {
-        clearInterval(intervalId);
-        startInterval();
-      }
-      if (carouselItems.length > 0) {
-        createIndicators();
-        updateCarousel();
-        startInterval();
-        prevBtn.addEventListener("click", () => {
-          showPrev();
-          resetInterval();
-        });
-        nextBtn.addEventListener("click", () => {
-          showNext();
-          resetInterval();
-        });
-      }
+      });
+
+      closeModal.addEventListener("click", () => modal.classList.remove("active"));
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.remove("active");
+      });
     </script>
   </body>
 </html>
