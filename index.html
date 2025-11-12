@@ -75,30 +75,30 @@
   </head>
   <body class="bg-slate-50">
     <!-- Header -->
-    <header class="bg-gradient-to-r from-sky-100 to-sky-200 shadow-md sticky top-0 z-50">
-      <div class="container mx-auto px-6 py-4 flex justify-between items-center flex-wrap gap-3">
-        <div class="flex items-center">
-          <span class="text-keywest-coral text-3xl mr-2">🌴</span>
-          <h1
-            class="text-3xl font-bold text-keywest-darkblue playfair-display hover:scale-105 transition-transform duration-300"
-          >
-            Southernmost Aesthetics
-          </h1>
-        </div>
-        <nav class="flex gap-3">
-          <a
-            class="bg-keywest-blue hover:bg-cyan-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition transform hover:scale-105"
-            href="#products"
-            >Products</a
-          >
-          <a
-            class="bg-keywest-coral text-white font-semibold py-2 px-6 rounded-lg shadow-md transition transform hover:scale-105"
-            href="#contact"
-            >Contact</a
-          >
-        </nav>
-      </div>
-    </header>
+<header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md shadow-sm">
+  <div class="container mx-auto flex justify-between items-center py-4 px-6">
+    <div class="flex items-center">
+      <img src="images/palm-icon.svg" alt="Palm" class="w-8 h-8 mr-2 text-keywest-coral" />
+      <h1 class="text-2xl md:text-3xl font-bold playfair-display text-keywest-darkblue">Southernmost Aesthetics</h1>
+    </div>
+    <nav class="hidden md:flex gap-6">
+      <a href="#carousel" class="text-keywest-darkblue hover:text-keywest-coral transition">Home</a>
+      <a href="#products" class="text-keywest-darkblue hover:text-keywest-coral transition">Shop</a>
+      <a href="#about" class="text-keywest-darkblue hover:text-keywest-coral transition">About</a>
+      <a href="#contact" class="bg-keywest-coral text-white py-2 px-5 rounded-lg shadow-md hover:bg-red-600 transition">Contact</a>
+    </nav>
+    <button class="md:hidden text-keywest-darkblue focus:outline-none" id="menuBtn">
+      <span class="material-icons text-3xl">menu</span>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md flex flex-col space-y-2 p-4">
+    <a href="#carousel" class="text-keywest-darkblue">Home</a>
+    <a href="#products" class="text-keywest-darkblue">Shop</a>
+    <a href="#about" class="text-keywest-darkblue">About</a>
+    <a href="#contact" class="text-keywest-coral font-semibold">Contact</a>
+  </div>
+</header>
+
 
     <!-- Carousel -->
     <section class="relative overflow-hidden h-[60vh] md:h-[80vh]" id="carousel">
